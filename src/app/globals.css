@@ -28,3 +28,6 @@ body { @apply antialiased bg-black text-white; }
 /* Simple star twinkle for subtle motion */
 @keyframes twinkle { 50% { opacity: 0.7; } }
 .twinkle { animation: twinkle 3s ease-in-out infinite; }
+
+/* Glass utility */
+.glass { @apply bg-white/10 border border-white/10 backdrop-blur; }

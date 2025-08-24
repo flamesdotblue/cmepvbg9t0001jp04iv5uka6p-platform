@@ -1,7 +1,70 @@
 import Link from "next/link";
 
+type Hotel = {
+  id: string;
+  name: string;
+  location: string;
+  pricePerNight: number;
+  img: string;
+  accent: string;
+};
+
+function getRandomHotels(): Hotel[] {
+  const base: Omit<Hotel, "pricePerNight">[] = [
+    {
+      id: "selene",
+      name: "Selene Suites",
+      location: "Low Earth Orbit",
+      img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-fuchsia-400/40 to-cyan-300/30",
+    },
+    {
+      id: "aurora",
+      name: "Aurora Halo",
+      location: "Polar Orbit",
+      img: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-emerald-300/40 to-sky-300/30",
+    },
+    {
+      id: "odyssey",
+      name: "Odyssey Ring",
+      location: "Geostationary",
+      img: "https://images.unsplash.com/photo-1462332420958-a05d1e002413?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-violet-400/40 to-indigo-300/30",
+    },
+    {
+      id: "nova",
+      name: "Nova Vista",
+      location: "Equatorial",
+      img: "https://images.unsplash.com/photo-1451186859696-371d9477be93?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-pink-400/40 to-orange-300/30",
+    },
+    {
+      id: "elysium",
+      name: "Elysium Dock",
+      location: "Sun-synchronous",
+      img: "https://images.unsplash.com/photo-1447433819943-74a20887a81e?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-rose-400/40 to-amber-300/30",
+    },
+    {
+      id: "zenith",
+      name: "Zenith Arc",
+      location: "High Earth Orbit",
+      img: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1400&auto=format&fit=crop",
+      accent: "from-cyan-300/40 to-blue-400/30",
+    },
+  ];
+
+  const shuffled = [...base].sort(() => Math.random() - 0.5);
+  return shuffled.map((h) => ({
+    ...h,
+    pricePerNight: Math.round(12000 + Math.random() * 18000),
+  }));
+}
+
 export default function Page() {
   const bgUrl = "https://i.ibb.co/DHmzX3kq/image.png";
+  const hotels = getRandomHotels();
 
   return (
     <main>
@@ -86,6 +149,37 @@ export default function Page() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black to-transparent" />
       </section>
 
+      {/* Bento glass cards */}
+      <section id="hotels" className="relative mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-8 flex items-end justify-between">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Discover more orbiting stays</h2>
+            <p className="mt-1 text-white/70">Handpicked hotels floating above Earth.</p>
+          </div>
+          <Link href="#pricing" className="btn btn-secondary btn-sm">View pricing</Link>
+        </div>
+
+        <div className="grid auto-rows-[14rem] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
+          {/* Card 1 - large highlight */}
+          <Card hotel={hotels[0]} className="lg:col-span-4 lg:row-span-2" />
+
+          {/* Card 2 */}
+          <Card hotel={hotels[1]} className="lg:col-span-2" compact />
+
+          {/* Card 3 */}
+          <Card hotel={hotels[2]} className="lg:col-span-2" compact />
+
+          {/* Card 4 - wide */}
+          <Card hotel={hotels[3]} className="lg:col-span-3" />
+
+          {/* Card 5 - tall */}
+          <Card hotel={hotels[4]} className="lg:col-span-3 lg:row-span-2" />
+
+          {/* Card 6 */}
+          <Card hotel={hotels[5]} className="lg:col-span-3" compact />
+        </div>
+      </section>
+
       {/* Anchors for CTAs (stub) */}
       <section id="reserve" className="bg-black px-6 py-16 text-center text-white/80">
         <p className="mx-auto max-w-2xl">
@@ -103,5 +197,51 @@ export default function Page() {
         </p>
       </section>
     </main>
+  );
+}
+
+function Card({ hotel, className = "", compact = false }: { hotel: Hotel; className?: string; compact?: boolean }) {
+  return (
+    <article
+      className={`group relative overflow-hidden rounded-2xl glass ${className}`}
+    >
+      {/* Background image */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url(${hotel.img})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "saturate(1.1)",
+        }}
+        aria-hidden
+      />
+      {/* Gradient veil */}
+      <div className={`absolute inset-0 bg-gradient-to-t ${hotel.accent} from-40% to-90%`} aria-hidden />
+      <div className="absolute inset-0 bg-black/40" aria-hidden />
+
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col justify-end p-5">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,.8)]" />
+          <span className="text-xs uppercase tracking-wide text-white/80">{hotel.location}</span>
+        </div>
+        <h3 className={`mt-2 font-bold ${compact ? "text-lg" : "text-2xl"}`}>{hotel.name}</h3>
+        <div className="mt-1 flex items-center justify-between">
+          <p className="text-white/85">
+            <span className="text-sm text-white/70">from</span>{" "}
+            <span className="font-semibold">${hotel.pricePerNight.toLocaleString()}</span>
+            <span className="text-sm text-white/70">/night</span>
+          </p>
+          <Link href="#" className="btn btn-secondary btn-sm">Details</Link>
+        </div>
+      </div>
+
+      {/* Hover glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+        <div className="absolute inset-0 ring-1 ring-white/10" />
+      </div>
+    </article>
   );
 }
