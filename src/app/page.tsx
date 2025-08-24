@@ -80,10 +80,8 @@ export default function Page() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Overlay for readability */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.85) 100%)" }} />
 
-        {/* Top bar */}
         <header className="relative z-10">
           <div className="mx-auto max-w-7xl px-6 pt-6">
             <div className="flex items-center justify-between rounded-full border border-white/10 bg-black/30 px-3 py-2 backdrop-blur supports-[backdrop-filter]:bg-black/30">
@@ -99,7 +97,6 @@ export default function Page() {
           </div>
         </header>
 
-        {/* Decorative gradient accents */}
         <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-brand/30 blur-3xl twinkle" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-brand-accent/20 blur-3xl twinkle" />
 
@@ -145,11 +142,9 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Subtle bottom fade for smooth scroll */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black to-transparent" />
       </section>
 
-      {/* Bento glass cards */}
       <section id="hotels" className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="mb-8 flex items-end justify-between">
           <div>
@@ -160,27 +155,46 @@ export default function Page() {
         </div>
 
         <div className="grid auto-rows-[14rem] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
-          {/* Card 1 - large highlight */}
           <Card hotel={hotels[0]} className="lg:col-span-4 lg:row-span-2" />
-
-          {/* Card 2 */}
           <Card hotel={hotels[1]} className="lg:col-span-2" compact />
-
-          {/* Card 3 */}
           <Card hotel={hotels[2]} className="lg:col-span-2" compact />
-
-          {/* Card 4 - wide */}
           <Card hotel={hotels[3]} className="lg:col-span-3" />
-
-          {/* Card 5 - tall */}
           <Card hotel={hotels[4]} className="lg:col-span-3 lg:row-span-2" />
-
-          {/* Card 6 */}
           <Card hotel={hotels[5]} className="lg:col-span-3" compact />
         </div>
       </section>
 
-      {/* Anchors for CTAs (stub) */}
+      <section id="tour" className="relative mx-auto max-w-7xl px-6 pb-20">
+        <div className="mb-6 flex items-end justify-between">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Take a quick orbital tour</h2>
+            <p className="mt-1 text-white/70">Vibrant glow, crisp playback, and immersive vibes.</p>
+          </div>
+          <Link href="#reserve" className="btn btn-primary btn-sm">Get early access</Link>
+        </div>
+
+        <div className="relative">
+          <div className="pointer-events-none absolute -top-16 -left-10 h-60 w-60 rounded-full bg-fuchsia-500/30 blur-3xl" aria-hidden />
+          <div className="pointer-events-none absolute -bottom-10 -right-6 h-72 w-72 rounded-full bg-cyan-400/30 blur-3xl" aria-hidden />
+          <div className="pointer-events-none absolute top-1/2 left-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400/20 blur-3xl" aria-hidden />
+
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-glow">
+            <video
+              className="aspect-video w-full"
+              controls
+              muted
+              loop
+              playsInline
+              autoPlay
+              poster="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=1200&auto=format&fit=crop"
+            >
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-planet-earth-rotating-1006-large.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
       <section id="reserve" className="bg-black px-6 py-16 text-center text-white/80">
         <p className="mx-auto max-w-2xl">
           Priority reservations open soon. This is a preview anchor section.
@@ -202,10 +216,7 @@ export default function Page() {
 
 function Card({ hotel, className = "", compact = false }: { hotel: Hotel; className?: string; compact?: boolean }) {
   return (
-    <article
-      className={`group relative overflow-hidden rounded-2xl glass ${className}`}
-    >
-      {/* Background image */}
+    <article className={`group relative overflow-hidden rounded-2xl glass ${className}`}>
       <div
         className="absolute inset-0"
         style={{
@@ -216,11 +227,9 @@ function Card({ hotel, className = "", compact = false }: { hotel: Hotel; classN
         }}
         aria-hidden
       />
-      {/* Gradient veil */}
       <div className={`absolute inset-0 bg-gradient-to-t ${hotel.accent} from-40% to-90%`} aria-hidden />
       <div className="absolute inset-0 bg-black/40" aria-hidden />
 
-      {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-end p-5">
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,.8)]" />
@@ -237,7 +246,6 @@ function Card({ hotel, className = "", compact = false }: { hotel: Hotel; classN
         </div>
       </div>
 
-      {/* Hover glow */}
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden>
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
         <div className="absolute inset-0 ring-1 ring-white/10" />
