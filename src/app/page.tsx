@@ -20,6 +20,22 @@ export default function Page() {
         {/* Overlay for readability */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.85) 100%)" }} />
 
+        {/* Top bar */}
+        <header className="relative z-10">
+          <div className="mx-auto max-w-7xl px-6 pt-6">
+            <div className="flex items-center justify-between rounded-full border border-white/10 bg-black/30 px-3 py-2 backdrop-blur supports-[backdrop-filter]:bg-black/30">
+              <Link href="#" className="flex items-center gap-2">
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-tr from-brand to-brand-accent shadow-glow" aria-hidden="true" />
+                <span className="font-semibold tracking-tight">Spacy</span>
+              </Link>
+              <nav aria-label="Top bar" className="flex items-center gap-2">
+                <Link href="#pricing" className="btn btn-secondary btn-sm">Pricing</Link>
+                <Link href="/dashboard" className="btn btn-primary btn-sm">Dashboard</Link>
+              </nav>
+            </div>
+          </div>
+        </header>
+
         {/* Decorative gradient accents */}
         <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-brand/30 blur-3xl twinkle" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-brand-accent/20 blur-3xl twinkle" />
@@ -76,9 +92,14 @@ export default function Page() {
           Priority reservations open soon. This is a preview anchor section.
         </p>
       </section>
-      <section id="learn" className="bg-black px-6 pb-24 text-center text-white/80">
+      <section id="learn" className="bg-black px-6 pb-16 text-center text-white/80">
         <p className="mx-auto max-w-2xl">
           Learn more about life aboard Spacy. This is a preview anchor section.
+        </p>
+      </section>
+      <section id="pricing" className="bg-black px-6 pb-24 text-center text-white/80">
+        <p className="mx-auto max-w-2xl">
+          Pricing details arriving soon. This is a preview anchor section.
         </p>
       </section>
     </main>

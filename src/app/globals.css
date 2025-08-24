@@ -21,6 +21,9 @@ body { @apply antialiased bg-black text-white; }
 .btn-secondary {
   @apply bg-white/10 backdrop-blur hover:bg-white/20 text-white;
 }
+.btn-sm {
+  @apply px-4 py-2 text-sm;
+}
 
 /* Simple star twinkle for subtle motion */
 @keyframes twinkle { 50% { opacity: 0.7; } }
